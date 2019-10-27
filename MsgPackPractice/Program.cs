@@ -66,7 +66,7 @@ namespace MsgPackPractice
                     sw.Stop();
                     Console.WriteLine("■XML 出力にかかった時間");
                     TimeSpan ts = sw.Elapsed;
-                    Console.WriteLine($"　{ts}");
+                    Console.WriteLine(string.Format("  {0}", ts));
                 }
 
                 {
@@ -87,7 +87,7 @@ namespace MsgPackPractice
                     sw.Stop();
                     Console.WriteLine("■XML 読込にかかった時間");
                     TimeSpan ts = sw.Elapsed;
-                    Console.WriteLine($"　{ts}");
+                    Console.WriteLine(string.Format("  {0}", ts));
                 }
             }
 
@@ -101,7 +101,7 @@ namespace MsgPackPractice
                     sw.Stop();
                     Console.WriteLine("■MessagePack 出力にかかった時間");
                     TimeSpan ts = sw.Elapsed;
-                    Console.WriteLine($"　{ts}");
+                    Console.WriteLine(string.Format("  {0}", ts));
                 }
                 // 読込
                 {
@@ -111,7 +111,7 @@ namespace MsgPackPractice
                     sw.Stop();
                     Console.WriteLine("■MessagePack 読込にかかった時間");
                     TimeSpan ts = sw.Elapsed;
-                    Console.WriteLine($"　{ts}");
+                    Console.WriteLine(string.Format("  {0}", ts));
                 }
             }
         }

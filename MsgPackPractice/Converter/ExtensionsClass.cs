@@ -101,7 +101,7 @@ namespace MsgPackPractice.Converter
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static byte[] Object2MessagePack<T>(this object obj)
+        public static byte[] Object2MessagePack(this object obj)
         {
             return MessagePackSerializer.Serialize(obj);
         }

@@ -43,13 +43,61 @@ namespace MsgPackPractice
             //    }
             //}
 
+            // XML
+            {
+                //保存先のファイル名
+                string fileName = @"DataElem.xml";
+                {
+                    var sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+
+                    //XmlSerializerオブジェクトを作成
+                    //オブジェクトの型を指定する
+                    System.Xml.Serialization.XmlSerializer serializer =
+                        new System.Xml.Serialization.XmlSerializer(typeof(Root));
+                    //書き込むファイルを開く（UTF-8 BOM無し）
+                    System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(
+                        fileName, false, new System.Text.UTF8Encoding(false));
+                    //シリアル化し、XMLファイルに保存する
+                    serializer.Serialize(streamWriter, root);
+                    //ファイルを閉じる
+                    streamWriter.Close();
+
+                    sw.Stop();
+                    Console.WriteLine("■XML 出力にかかった時間");
+                    TimeSpan ts = sw.Elapsed;
+                    Console.WriteLine($"　{ts}");
+                }
+
+                {
+                    var sw = new System.Diagnostics.Stopwatch();
+                    sw.Start();
+
+                    //XmlSerializerオブジェクトを作成
+                    System.Xml.Serialization.XmlSerializer serializer =
+                        new System.Xml.Serialization.XmlSerializer(typeof(Root));
+                    //読み込むファイルを開く
+                    System.IO.StreamReader sr = new System.IO.StreamReader(
+                        fileName, new System.Text.UTF8Encoding(false));
+                    //XMLファイルから読み込み、逆シリアル化する
+                    Root obj = (Root)serializer.Deserialize(sr);
+                    //ファイルを閉じる
+                    sr.Close();
+
+                    sw.Stop();
+                    Console.WriteLine("■XML 読込にかかった時間");
+                    TimeSpan ts = sw.Elapsed;
+                    Console.WriteLine($"　{ts}");
+                }
+            }
+
             // MessagePack
             {
                 // 出力
                 {
                     var sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
-                    System.IO.File.WriteAllBytes("manage.bin", ExtensionsClass.Object2MessagePack<Root>(root));
+                    System.IO.File.WriteAllBytes("manage.bin", ExtensionsClass.Object2MessagePack(root));
                     sw.Stop();
                     Console.WriteLine("■MessagePack 出力にかかった時間");
                     TimeSpan ts = sw.Elapsed;

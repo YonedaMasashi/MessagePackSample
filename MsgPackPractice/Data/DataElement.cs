@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessagePack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,20 @@ using System.Threading.Tasks;
 
 namespace MsgPackPractice.Data
 {
+    [MessagePackObject]
     public class DataElement
     {
+        [Key(0)]
         public long lA;
+        [Key(1)]
         public double X1;
+        [Key(2)]
         public double Y1;
+        [Key(3)]
         public double X2;
+        [Key(4)]
         public double Y2;
+        [Key(5)]
         public long lS;
 
         public override string ToString()
@@ -21,9 +29,11 @@ namespace MsgPackPractice.Data
         }
     }
 
-    public class Piece
-    {
+    [MessagePackObject]
+    public class Piece {
+        [Key(0)]
         public long PieceNo;
+        [Key(1)]
         public List<DataElement> DataList = new List<DataElement>();
 
         public override string ToString()
@@ -37,9 +47,11 @@ namespace MsgPackPractice.Data
         }
     }
 
-    public class Pack
-    {
+    [MessagePackObject]
+    public class Pack {
+        [Key(0)]
         public long PackNo;
+        [Key(1)]
         public List<Piece> PieceList = new List<Piece>();
 
         public override string ToString()
@@ -53,8 +65,9 @@ namespace MsgPackPractice.Data
         }
     }
 
-    public class Root
-    {
+    [MessagePackObject]
+    public class Root {
+        [Key(0)]
         public List<Pack> PackList = new List<Pack>();
 
         public override string ToString()
